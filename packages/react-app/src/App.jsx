@@ -675,16 +675,16 @@ function App(props) {
               IPFS Download
             </Link>
           </Menu.Item>
-          <Menu.Item key="/debugcontracts">
-            <Link
-              onClick={() => {
-                setRoute("/debugcontracts");
-              }}
-              to="/debugcontracts"
-            >
-              Debug Contracts
-            </Link>
-          </Menu.Item>
+          {/*<Menu.Item key="/debugcontracts">*/}
+          {/*  <Link*/}
+          {/*    onClick={() => {*/}
+          {/*      setRoute("/debugcontracts");*/}
+          {/*    }}*/}
+          {/*    to="/debugcontracts"*/}
+          {/*  >*/}
+          {/*    Debug Contracts*/}
+          {/*  </Link>*/}
+          {/*</Menu.Item>*/}
         </Menu>
 
         <Switch>
@@ -850,15 +850,15 @@ function App(props) {
 
             <pre style={{ padding: 16, width: 500, margin: "auto", paddingBottom: 150 }}>{ipfsContent}</pre>
           </Route>
-          <Route path="/debugcontracts">
-            <Contract
-              name="YourCollectible"
-              signer={userSigner}
-              provider={localProvider}
-              address={address}
-              blockExplorer={blockExplorer}
-              contractConfig={contractConfig}
-            />
+          {/*<Route path="/debugcontracts">*/}
+          {/*  <Contract*/}
+          {/*    name="YourCollectible"*/}
+          {/*    signer={userSigner}*/}
+          {/*    provider={localProvider}*/}
+          {/*    address={address}*/}
+          {/*    blockExplorer={blockExplorer}*/}
+          {/*    contractConfig={contractConfig}*/}
+          {/*  />*/}
             {/*
             <Contract
               name="UNI"
@@ -869,7 +869,7 @@ function App(props) {
               blockExplorer={blockExplorer}
             />
             */}
-          </Route>
+          {/*</Route>*/}
         </Switch>
       </BrowserRouter>
 

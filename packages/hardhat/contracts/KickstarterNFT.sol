@@ -1,24 +1,21 @@
 pragma solidity >=0.6.0 <0.7.0;
 //SPDX-License-Identifier: MIT
 
-//import "hardhat/console.sol";
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
-//import "@openzeppelin/contracts/access/Ownable.sol";
-//learn more: https://docs.openzeppelin.com/contracts/3.x/erc721
+import "@openzeppelin/contracts/access/Ownable.sol";
 
-// GET LISTED ON OPENSEA: https://testnets.opensea.io/get-listed/step-two
-
-contract YourCollectible is ERC721 {
+contract KickstarterNFT is ERC721, Ownable {
 
   using Counters for Counters.Counter;
   Counters.Counter private _tokenIds;
 
-  constructor(bytes32[] memory assetsForSale) public ERC721("YourCollectible", "YCB") {
+  constructor(bytes32[] memory assetsForSale, address _owner) public ERC721("KickstarterNFT", "KFT") {
     _setBaseURI("https://ipfs.io/ipfs/");
     for(uint256 i=0;i<assetsForSale.length;i++){
       forSale[assetsForSale[i]] = true;
     }
+      transferOwnership(_owner);
   }
 
   //this marks an item in IPFS as "forsale"
@@ -28,7 +25,8 @@ contract YourCollectible is ERC721 {
 
   function mintItem(string memory tokenURI)
       public
-      returns (uint256)
+        onlyOwner
+        returns (uint256)
   {
       bytes32 uriHash = keccak256(abi.encodePacked(tokenURI));
 
@@ -39,7 +37,7 @@ contract YourCollectible is ERC721 {
       _tokenIds.increment();
 
       uint256 id = _tokenIds.current();
-      _mint(msg.sender, id);
+      _mint(tx.origin, id);
       _setTokenURI(id, tokenURI);
 
       uriToTokenId[uriHash] = id;
